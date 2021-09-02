@@ -136,7 +136,7 @@ exports.createPages = async function ({ actions, graphql }) {
   // `)
   data.allStrapiPortfolio.nodes.forEach(node => {
     // console.log("init");
-    console.log("portfolio",node);
+    console.log(" ye he portfolio",node);
     const sluggish = node.Slug
     actions.createPage({
       path: '/portfolio/' + sluggish,
