@@ -16,6 +16,7 @@ import SwiperCore, { Pagination, Navigation } from "swiper";
 
 SwiperCore.use([Pagination, Navigation]);
 const ProtfolioDetails = (data) => {
+  console.log("second portfolio",data)
   const [modalIsOpen, setModalIsOpen] = useState(false);
   if (modalIsOpen == true) {
     return (
@@ -26,7 +27,7 @@ const ProtfolioDetails = (data) => {
         <Swiper pagination={{
           "type": "fraction"
         }} navigation={true} className="mySwiper">
-        {data.pageContext.data.image.map((img, index) => (
+        {data.data.pageContext.data.image.map((img, index) => (
           <SwiperSlide id="swiper">
             <img src={img.formats.large.url}></img>
           </SwiperSlide>
@@ -44,7 +45,7 @@ const ProtfolioDetails = (data) => {
           <Col className="Col-lg-3" >
             <Row lg={3} md={7} sm={12}>
               {/* <div className="portDetailThumb" onClick = {()=>{ModalPortfolio}}> */}
-              {data.pageContext.data.image.map((img, index) => (
+              {data.data.pageContext.data.image.map((img, index) => (
                 <div className="portDetailThumb" onClick={() => setModalIsOpen(true)}>
                   <img src={img.formats.large.url}></img>
                 </div>
@@ -52,13 +53,13 @@ const ProtfolioDetails = (data) => {
               {/* </div> */}
               <Col lg={4} md={5} sm={12}>
                 <div className="singlePortfoio_content">
-                  <h3>{data.pageContext.data.title}</h3>
+                  <h3>{data.data.pageContext.data.title}</h3>
                   <ReactMarkdown children={data.data.pageContext.data.body} />
                 </div>
                 <div className="singlePortfoio_content">
                   <h4>Category:</h4>
                   <p>
-                    {data.pageContext.data.categories}
+                    {data.data.pageContext.data.categories}
                     {/* {categories.map(({ name }, index) => (
                   <a key={index} href={url}>
                     {name},
@@ -68,7 +69,7 @@ const ProtfolioDetails = (data) => {
                 </div>
                 <div className="singlePortfoio_content">
                   <h4>Date:</h4>
-                  <p>{data.pageContext.data.date}</p>
+                  <p>{data.data.pageContext.data.date}</p>
                 </div>
                 {/* <Modal
                   open={modalIsOpen}
