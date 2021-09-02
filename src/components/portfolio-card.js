@@ -7,7 +7,7 @@ const PortfolioCard = ({data}) => {
   // console.log(image[0].localFile.childImageSharp.gatsbyImageData.images.fallback.src)
   return (
     <div className={`singlefolio`}>
-      <img style = {{height:400}} src={image[0].localFile.childImageSharp.gatsbyImageData.images.fallback.src} alt={title} />
+      <img style = {{height:400}} src={image[0].formats.large.url} alt={title} />
       <div className="folioHover">
         {/* <a className="cate" href="#">
           {data.data.pageContext.categories.map(cat => cat + ", ")}

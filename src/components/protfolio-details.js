@@ -28,7 +28,7 @@ const ProtfolioDetails = (data) => {
         }} navigation={true} className="mySwiper">
         {data.data.pageContext.data.image.map((img, index) => (
           <SwiperSlide id="swiper">
-            <img src={img.localFile.childImageSharp.gatsbyImageData.images.fallback.src}></img>
+            <img src={img.formats.large.url}></img>
           </SwiperSlide>
         ))}
         </Swiper>
@@ -46,7 +46,7 @@ const ProtfolioDetails = (data) => {
               {/* <div className="portDetailThumb" onClick = {()=>{ModalPortfolio}}> */}
               {data.data.pageContext.data.image.map((img, index) => (
                 <div className="portDetailThumb" onClick={() => setModalIsOpen(true)}>
-                  <img src={img.localFile.childImageSharp.gatsbyImageData.images.fallback.src}></img>
+                  <img src={img.formats.large.url}></img>
                 </div>
               ))}
               {/* </div> */}

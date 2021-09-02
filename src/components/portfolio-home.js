@@ -12,9 +12,9 @@ query {
   allStrapiPortfolio {
     nodes {
       image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(width:250)
+        formats{
+          large{
+            url
           }
         }
       }

@@ -17,9 +17,9 @@ query {
     nodes {
       Slug
       image {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(width:250)
+        formats{
+          large{
+            url
           }
         }
       }
