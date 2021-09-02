@@ -54,97 +54,90 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   });
 };
 
-exports.createPages = async function ({ actions, graphql }) {
-  const { data } = await graphql(`
-  {
-    allStrapiArticle {
-      nodes {
-        Slug
-        title
-        image {
-          formats{
-            large{
-              url
-            }
-          }
-        }
-        body
-        date
-      }
-    }
-    allStrapiPortfolio {
-      nodes {
-        Slug
-        image {
-          formats {
-            thumbnail{
-              url
-            }
-            large{
-              url
-            }
-          }
-        }
-        title
-        body
-        categories
-        date
-        social {
-          LinkedinProfiles
-        }
-      }
-    }
-  }  
-  `);
-  data.allStrapiArticle.nodes.forEach(node => {
-    // console.log("init");
-    console.log("articles",node);
-    const slug = node.Slug
-    actions.createPage({
-      path: slug,
-      component: path.resolve('./src/pages/blog-single.js'),
-      context: {
-        slug: slug,
-        data: node
-      },
-    });
-  });
 
-  // exports.createPages = async function ({ actions, graphql }) {
-  // const { data1 } = await graphql(`
-  // query {
-  //   allStrapiPortfolio {
-  //     nodes {
-  //       Slug
-  //       image {
-  //         localFile {
-  //           childImageSharp {
-  //             gatsbyImageData
-  //           }
-  //         }
-  //       }
-  //       title
-  //       body
-  //       categories
-  //       date
-  //       social {
-  //         LinkedinProfiles
-  //       }
-  //     }
-  //   }
-  // }  
-  // `)
-  data.allStrapiPortfolio.nodes.forEach(node => {
-    // console.log("init");
-    console.log(" ye he portfolio",node);
-    const sluggish = node.Slug
-    actions.createPage({
-      path: '/portfolio/' + sluggish,
-      component: path.resolve('./src/pages/portfolio-details.js'),
-      context: {
-        slug: sluggish,
-        data: node
-      },
+
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
+  const blogPostTemplate = path.resolve(`src/templates/blog-post.js`)
+  // Query for markdown nodes to use in creating pages.
+  // You can query for whatever data you want to create pages for e.g.
+  // products, portfolio items, landing pages, etc.
+  // Variables can be added as the second function parameter
+  return graphql(`
+    query loadPagesQuery ($limit: Int!) {
+      allStrapiArticle {
+        nodes {
+          Slug
+          title
+          image {
+            formats{
+              large{
+                url
+              }
+            }
+          }
+          body
+          date
+        }
+      }
+      allStrapiPortfolio {
+        nodes {
+          Slug
+          image {
+            formats {
+              thumbnail{
+                url
+              }
+              large{
+                url
+              }
+            }
+          }
+          title
+          body
+          categories
+          date
+          social {
+            LinkedinProfiles
+          }
+        }
+      }
+    }
+  `, { limit: 1000 }).then(result => {
+    if (result.errors) {
+      throw result.errors
+    }
+
+    // Create blog post pages.
+    result.data.allStrapiArticle.nodes.forEach(node => {
+      // console.log("init");
+      console.log("articles",node);
+      const slug = node.Slug
+      actions.createPage({
+        path: slug,
+        component: path.resolve('./src/pages/blog-single.js'),
+        context: {
+          slug: slug,
+          data: node
+        },
+      });
     });
-  });
-};
+    result.data.allStrapiPortfolio.nodes.forEach(node => {
+      // console.log("init");
+      console.log(" ye he portfolio",node);
+      const sluggish = node.Slug
+      actions.createPage({
+        path: '/portfolio/' + sluggish,
+        component: path.resolve('./src/pages/portfolio-details.js'),
+        context: {
+          slug: sluggish,
+          data: node
+        },
+      });
+    });
+  })
+  
+}
+
+
+
