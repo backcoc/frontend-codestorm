@@ -77,7 +77,9 @@ exports.createPages = async function ({ actions, graphql }) {
         Slug
         image {
           formats {
-            url
+            large{
+              url
+            }
           }
         }
         title
