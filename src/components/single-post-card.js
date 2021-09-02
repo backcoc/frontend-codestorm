@@ -11,7 +11,7 @@ const SinglePostCard = (data) => {
     <Fragment>
       <div className="single_blog">
         <div className="blog_thumb">
-          <img src={data.data.pageContext.data.image.localFile.childrenImageSharp[0].gatsbyImageData.images.fallback.src} alt={data.data.pageContext.data.title} />
+          <img src={data.data.pageContext.data.image.formats.large.url} alt={data.data.pageContext.data.title} />
         </div>
         <div className="blog_headings">
           <span className="blog_date">20 nov</span>

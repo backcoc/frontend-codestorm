@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Paginations from "@/components/paginations";
 import { BlogData } from "@/data";
 import BlogCard from "@/components/blog-card";
-import { graphql,useStaticQuery } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 
 
 
@@ -15,10 +15,11 @@ query {
       Slug
       title
       image {
-        localFile {
-          childrenImageSharp {
-            gatsbyImageData(width: 150)
+        formats{
+          large{
+            url
           }
+        
         }
       }
       date

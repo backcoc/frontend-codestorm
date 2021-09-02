@@ -10,7 +10,7 @@ const BlogCard = ({ data }) => {
   return (
     <div className="latestBlogItem">
       <div className="lbi_thumb">
-        <img style = {{height:200}} src={image.localFile.childrenImageSharp[0].gatsbyImageData.images.fallback.src} alt={title} />
+        <img style = {{height:200}} src={image.formats.large.url} alt={title} />
       </div>
       <div className="lbi_details">
         <Link className="lbid_date" to={url}>

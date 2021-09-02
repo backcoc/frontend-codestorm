@@ -12,9 +12,9 @@ query {
       Slug
       title
       image {
-        localFile {
-          childrenImageSharp {
-            gatsbyImageData(width:200)
+        formats{
+          large{
+            url
           }
         }
       }
