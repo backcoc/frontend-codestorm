@@ -64,7 +64,7 @@ exports.createPages = ({ graphql, actions }) => {
   // products, portfolio items, landing pages, etc.
   // Variables can be added as the second function parameter
   return graphql(`
-    query loadPagesQuery ($limit: Int!) {
+    query loadPagesQuery  {
       allStrapiArticle {
         nodes {
           Slug
@@ -136,8 +136,103 @@ exports.createPages = ({ graphql, actions }) => {
       });
     });
   })
-  
 }
 
 
 
+
+
+// exports.createPages = async function ({ actions, graphql }) {
+//   const { data } = await graphql(`
+//   {
+//     allStrapiArticle {
+//       nodes {
+//         Slug
+//         title
+//         image {
+//           formats{
+//             large{
+//               url
+//             }
+//           }
+//         }
+//         body
+//         date
+//       }
+//     }
+//     allStrapiPortfolio {
+//       nodes {
+//         Slug
+//         image {
+//           formats {
+//             thumbnail{
+//               url
+//             }
+//             large{
+//               url
+//             }
+//           }
+//         }
+//         title
+//         body
+//         categories
+//         date
+//         social {
+//           LinkedinProfiles
+//         }
+//       }
+//     }
+//   }  
+//   `);
+//   data.allStrapiArticle.nodes.forEach(node => {
+//     // console.log("init");
+//     console.log("articles",node);
+//     const slug = node.Slug
+//     actions.createPage({
+//       path: slug,
+//       component: path.resolve('./src/pages/blog-single.js'),
+//       context: {
+//         slug: slug,
+//         data: node
+//       },
+//     });
+//   });
+
+//   // exports.createPages = async function ({ actions, graphql }) {
+//   // const { data1 } = await graphql(`
+//   // query {
+//   //   allStrapiPortfolio {
+//   //     nodes {
+//   //       Slug
+//   //       image {
+//   //         localFile {
+//   //           childImageSharp {
+//   //             gatsbyImageData
+//   //           }
+//   //         }
+//   //       }
+//   //       title
+//   //       body
+//   //       categories
+//   //       date
+//   //       social {
+//   //         LinkedinProfiles
+//   //       }
+//   //     }
+//   //   }
+//   // }  
+//   // `)
+//   data.allStrapiPortfolio.nodes.forEach(node => {
+//     // console.log("init");
+//     console.log(" ye he portfolio",node);
+//     const sluggish = node.Slug
+//     actions.createPage({
+//       path: '/portfolio/' + sluggish,
+//       component: path.resolve('./src/pages/portfolio-details.js'),
+//       context: {
+//         slug: sluggish,
+//         data: node
+//       },
+//     });
+//   });
+// };
