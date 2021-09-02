@@ -16,7 +16,7 @@ import SwiperCore, { Pagination, Navigation } from "swiper";
 
 SwiperCore.use([Pagination, Navigation]);
 const ProtfolioDetails = (data) => {
-  console.log("second portfolio",data.data.pageContext.data.image[0].formats)
+  console.log("second portfolio",data.data.pageContext.data)
   const [modalIsOpen, setModalIsOpen] = useState(false);
   if (modalIsOpen == true) {
     return (
