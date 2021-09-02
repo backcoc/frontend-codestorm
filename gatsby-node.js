@@ -75,13 +75,7 @@ exports.createPages = async function ({ actions, graphql }) {
     allStrapiPortfolio {
       nodes {
         Slug
-        image [
-          formats {
-            large {
-              url
-            }
-          }
-        ]
+        image 
         title
         body
         categories
