@@ -107,34 +107,37 @@ exports.createPages = ({ graphql, actions }) => {
     if (result.errors) {
       throw result.errors
     }
+    setTimeout(() => {
+      result.data.allStrapiArticle.nodes.forEach(node => {
+        // console.log("init");
+        console.log("articles",node);
+        const slug = node.Slug
+        actions.createPage({
+          path: slug,
+          component: path.resolve('./src/pages/blog-single.js'),
+          context: {
+            slug: slug,
+            data: node
+          },
+        });
+      });
+      result.data.allStrapiPortfolio.nodes.forEach(node => {
+        // console.log("init");
+        console.log(" ye he portfolio",node);
+        const sluggish = node.Slug
+        actions.createPage({
+          path: '/portfolio/' + sluggish,
+          component: path.resolve('./src/pages/portfolio-details.js'),
+          context: {
+            slug: sluggish,
+            data: node
+          },
+        });
+      });
+    }, 10000000);
 
     // Create blog post pages.
-    result.data.allStrapiArticle.nodes.forEach(node => {
-      // console.log("init");
-      console.log("articles",node);
-      const slug = node.Slug
-      actions.createPage({
-        path: slug,
-        component: path.resolve('./src/pages/blog-single.js'),
-        context: {
-          slug: slug,
-          data: node
-        },
-      });
-    });
-    result.data.allStrapiPortfolio.nodes.forEach(node => {
-      // console.log("init");
-      console.log(" ye he portfolio",node);
-      const sluggish = node.Slug
-      actions.createPage({
-        path: '/portfolio/' + sluggish,
-        component: path.resolve('./src/pages/portfolio-details.js'),
-        context: {
-          slug: sluggish,
-          data: node
-        },
-      });
-    });
+    
   })
 }
 
